@@ -1,7 +1,8 @@
 import { LobbyClient } from "boardgame.io/client";
+import { SERVER_URL } from "../../serverUrl";
 
 const lobbyClient = new LobbyClient({
-  server: "http://localhost:8000",
+  server: SERVER_URL,
 });
 
 export async function createOnlineRoom() {

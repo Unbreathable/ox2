@@ -5,6 +5,7 @@ import GameCanvas from "./GameCanvas";
 import { createMyGame } from "./game/MyGame";
 import { MyBot } from "./game/ai/bot";
 import { Local, SocketIO } from "boardgame.io/multiplayer";
+import { SERVER_URL } from "./serverUrl";
 
 type GameClientProps = {
   setScreen: React.Dispatch<React.SetStateAction<Screen>>;
@@ -95,7 +96,7 @@ export default function GameClient({
       debug: true,
       multiplayer: settings.game.isOnline
         ? SocketIO({
-            server: "http://localhost:8000",
+            server: SERVER_URL,
           })
         : settings.game.isCPU
           ? Local({
