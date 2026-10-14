@@ -105,7 +105,10 @@ const MIME: Record<string, string> = {
 
 server.app.use(async (ctx, next) => {
   if (ctx.method !== "GET" && ctx.method !== "HEAD") return next();
-  if (ctx.status !== 404 && ctx.body !== undefined) return next();
+  // boardgame.io API routes must reach its router (GET /games/:name/:id etc.)
+  if (ctx.path === "/games" || ctx.path.startsWith("/games/") || ctx.path.startsWith("/socket.io")) {
+    return next();
+  }
   const rel = decodeURIComponent(ctx.path).replace(/^\/+/, "");
   let file = path.join(DIST, rel);
   if (!file.startsWith(DIST)) return next();
