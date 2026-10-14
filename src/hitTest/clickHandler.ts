@@ -540,19 +540,13 @@ export function createClickHandler({
         !settingsRef.current.ui.changingDeck[0] &&
         !settingsRef.current.ui.changingDeck[1]
       ) {
+        // cpu (offline only; online has no CPU toggle)
         if (screen === "menuOffline") {
-          // cpu
           if (isInsideCPUTrue(x, y, ratio)) {
             if (settingsRef.current.ui.seEnabled) {
               playSe("seClick");
             }
             settingsRef.current.game.isCPU = !settingsRef.current.game.isCPU;
-          }
-        } else {
-          // 部屋に入る
-          if (isInsideCPUTrue(x, y, ratio)) {
-            playSe("seError");
-            alert("サーバーが見つかりません");
           }
         }
         // 上２
